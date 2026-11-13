@@ -1,0 +1,12 @@
+# Data is CDLA-Sharing-1.0 and large: never commit it (download from Kaggle instead)
+data/
+artifacts/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.egg-info/
+results/llm_reports/raw_*.json
