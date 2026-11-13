@@ -1,0 +1,45 @@
+{
+  "case_id": "STR-20220909-001",
+  "review_date": "2022-09-09",
+  "account": {
+    "account_id": "0150240_812D22980",
+    "bank_code": "0150240",
+    "owner_type": "Corporation"
+  },
+  "risk": {
+    "score": 1.0,
+    "rank_today": 1,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 7,
+    "transfers_flagged": 1,
+    "sent_count": 1,
+    "sent_total_usd": 19758.47,
+    "received_count": 6,
+    "received_total_usd": 6063.76,
+    "distinct_counterparties": 3
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-09 15:59",
+      "direction": "sent",
+      "counterparty": "0048309_811C599A0",
+      "amount_usd": 19758.47,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 1.0
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had earlier paid the sender (money going back and forth)",
+    "it was paid in Saudi Riyal"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-09 15:59)",
+  "red_flag_rules": [
+    "fan-out (had already paid 20 or more different accounts in the previous 24 hours)",
+    "pass-through (paid on about what it had received in the previous 24 hours)"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "STR-20220909-006",
+  "review_date": "2022-09-09",
+  "account": {
+    "account_id": "00220_8002B5EE0",
+    "bank_code": "00220",
+    "owner_type": "Sole Proprietorship"
+  },
+  "risk": {
+    "score": 0.997,
+    "rank_today": 6,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 33,
+    "transfers_flagged": 1,
+    "sent_count": 29,
+    "sent_total_usd": 21151827.2,
+    "received_count": 4,
+    "received_total_usd": 32580.83,
+    "distinct_counterparties": 11
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-09 03:51",
+      "direction": "sent",
+      "counterparty": "0111141_80C5219E0",
+      "amount_usd": 13544.27,
+      "currency": "Euro",
+      "payment_format": "ACH",
+      "transfer_score": 0.997
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the sender had never paid this receiver before",
+    "the amount was US$13,544.27"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-09 03:51)",
+  "red_flag_rules": [
+    "pass-through (paid on about what it had received in the previous 24 hours)",
+    "structuring (amount just below the US$10,000 reporting limit)"
+  ]
+}

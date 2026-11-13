@@ -1,0 +1,111 @@
+{
+  "model": {
+    "core_days_mean_precision_at_100": 0.9533333333333335,
+    "per_day": [
+      {
+        "day": "2022-09-08",
+        "precision": 0.89,
+        "alerts": 100,
+        "positives_in_day": 336,
+        "ranker": "model"
+      },
+      {
+        "day": "2022-09-09",
+        "precision": 1.0,
+        "alerts": 100,
+        "positives_in_day": 784,
+        "ranker": "model"
+      },
+      {
+        "day": "2022-09-10",
+        "precision": 0.97,
+        "alerts": 100,
+        "positives_in_day": 715,
+        "ranker": "model"
+      }
+    ]
+  },
+  "rules": {
+    "core_days_mean_precision_at_100": 0.10333333333333333,
+    "per_day": [
+      {
+        "day": "2022-09-08",
+        "precision": 0.09,
+        "alerts": 100,
+        "positives_in_day": 336,
+        "ranker": "rules"
+      },
+      {
+        "day": "2022-09-09",
+        "precision": 0.14,
+        "alerts": 100,
+        "positives_in_day": 784,
+        "ranker": "rules"
+      },
+      {
+        "day": "2022-09-10",
+        "precision": 0.08,
+        "alerts": 100,
+        "positives_in_day": 715,
+        "ranker": "rules"
+      }
+    ]
+  },
+  "involved_accounts_per_day": [
+    {
+      "day": "2022-09-08",
+      "involved": 336,
+      "active_accounts": 104075
+    },
+    {
+      "day": "2022-09-09",
+      "involved": 784,
+      "active_accounts": 346684
+    },
+    {
+      "day": "2022-09-10",
+      "involved": 715,
+      "active_accounts": 148023
+    },
+    {
+      "day": "2022-09-11",
+      "involved": 338,
+      "active_accounts": 339
+    },
+    {
+      "day": "2022-09-12",
+      "involved": 239,
+      "active_accounts": 239
+    },
+    {
+      "day": "2022-09-13",
+      "involved": 146,
+      "active_accounts": 146
+    },
+    {
+      "day": "2022-09-14",
+      "involved": 95,
+      "active_accounts": 95
+    },
+    {
+      "day": "2022-09-15",
+      "involved": 38,
+      "active_accounts": 38
+    },
+    {
+      "day": "2022-09-16",
+      "involved": 35,
+      "active_accounts": 35
+    },
+    {
+      "day": "2022-09-17",
+      "involved": 21,
+      "active_accounts": 21
+    },
+    {
+      "day": "2022-09-18",
+      "involved": 10,
+      "active_accounts": 10
+    }
+  ]
+}
