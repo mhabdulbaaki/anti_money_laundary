@@ -2,10 +2,14 @@ from types import SimpleNamespace
 
 from aml.str_agent import (
     DEFAULT_MODEL,
+    GEMINI_MODEL,
     REQUIRED_SECTIONS,
     SYSTEM_PROMPT,
+    draft_report_gemini,
     draft_report_llm,
     draft_report_template,
+    model_display_name,
+    pick_drafter,
     validate_report,
 )
 
@@ -145,3 +149,61 @@ def test_llm_draft_sends_evidence_with_fallbacks_and_returns_text():
 def test_llm_draft_refusal_returns_empty_text():
     text, meta = draft_report_llm(EVIDENCE, client=_FakeClient(_response(stop_reason="refusal")))
     assert text == "" and meta["stop_reason"] == "refusal"
+
+
+# ---------------------------------------------------------------- Gemini call (mocked, no network)
+class _FakeInteractions:
+    def __init__(self, interaction):
+        self.interaction = interaction
+        self.kwargs = None
+
+    def create(self, **kwargs):
+        self.kwargs = kwargs
+        return self.interaction
+
+
+def _interaction(status="completed", text="draft"):
+    return SimpleNamespace(
+        id="int-1",
+        model="gemini-3.8-flash",
+        status=status,
+        output_text=text,
+        usage=SimpleNamespace(total_input_tokens=800, total_output_tokens=250),
+    )
+
+
+def test_gemini_draft_sends_same_prompt_and_evidence():
+    client = SimpleNamespace(interactions=_FakeInteractions(_interaction(text=_report())))
+    text, meta = draft_report_gemini(EVIDENCE, client=client)
+    sent = client.interactions.kwargs
+    assert sent["model"] == GEMINI_MODEL
+    assert sent["system_instruction"] == SYSTEM_PROMPT
+    assert "CASE-0007" in sent["input"]
+    assert text == _report() and validate_report(text, EVIDENCE).ok
+    assert meta == {
+        "model": "gemini-3.8-flash",
+        "stop_reason": "completed",
+        "input_tokens": 800,
+        "output_tokens": 250,
+        "request_id": "int-1",
+    }
+
+
+def test_gemini_draft_unfinished_returns_empty_text():
+    client = SimpleNamespace(interactions=_FakeInteractions(_interaction(status="failed", text="partial")))
+    text, meta = draft_report_gemini(EVIDENCE, client=client)
+    assert text == "" and meta["stop_reason"] == "failed"
+
+
+def test_model_display_names():
+    assert model_display_name("claude-opus-5-5") == "Claude Opus 5.5"
+    assert model_display_name("gemini-3.8-flash") == "Gemini 3.8 Flash"
+    assert model_display_name("gemini-4-hydrogen") == "Gemini 4 Hydrogen"
+
+
+def test_pick_drafter_from_environment():
+    assert pick_drafter({}) == "template"
+    assert pick_drafter({"ANTHROPIC_API_KEY": "k"}) == "claude"
+    assert pick_drafter({"GEMINI_API_KEY": "k", "ANTHROPIC_API_KEY": "k"}) == "gemini"
+    assert pick_drafter({"GOOGLE_API_KEY": "k"}) == "gemini"
+    assert pick_drafter({"GEMINI_API_KEY": ""}) == "template"

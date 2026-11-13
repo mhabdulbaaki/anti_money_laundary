@@ -19,6 +19,7 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 from aml import config
+from aml.str_agent import model_display_name
 
 TEMPLATE = config.ROOT / "DSCI6601_Course_Project_Template.docx"
 OUT = config.ROOT / "report" / "AML_Project_Report.docx"
@@ -35,9 +36,11 @@ def load() -> dict[str, Any]:
         "exp": json.loads((r / "explanations.json").read_text()),
         "acc": json.loads((r / "accounts.json").read_text()),
     }
-    llm = r / "reports_summary_llm.json"
+    # the most recent AI run (Gemini or Claude), if any
+    runs = (r / "reports_summary_gemini.json", r / "reports_summary_claude.json")
+    ai = sorted((p for p in runs if p.exists()), key=lambda p: p.stat().st_mtime)
     tpl = r / "reports_summary_template.json"
-    out["drafts"] = json.loads(llm.read_text()) if llm.exists() else None
+    out["drafts"] = json.loads(ai[-1].read_text()) if ai else None
     out["drafts_template"] = json.loads(tpl.read_text()) if tpl.exists() else None
     return out
 
@@ -156,14 +159,14 @@ def content(R: dict[str, Any]) -> dict[str, Any]:
     per_day = drafts["reports"] // max(len({c["case_id"][4:12] for c in drafts["cases"]}), 1)
     if R["drafts"]:
         draft_text = (
-            f"**AI drafts:** for each test day’s top {per_day} accounts, Claude Opus 5.5 turned an evidence packet of computed facts "
+            f"**AI drafts:** for each test day’s top {per_day} accounts, {model_display_name(drafts['model'])} turned an evidence packet of computed facts "
             f"into a FINTRAC-style draft: {pct(drafts['format_ok_rate'])} were well-formed and {pct(drafts['numbers_ok_rate'])} used only "
             f"evidence numbers ({drafts['reports']} drafts)."
         )
     else:
         draft_text = (
-            f"**AI drafts:** evidence packets (top {per_day} accounts a day) and checks are built, but the Claude Opus 5.5 run "
-            "awaits API credentials: target 3 is unmeasured."
+            f"**AI drafts:** evidence packets (top {per_day} accounts a day) and checks are built, but the AI drafting run "
+            "awaits an API key: target 3 is unmeasured."
         )
 
     sections = {

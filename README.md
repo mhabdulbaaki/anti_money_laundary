@@ -20,7 +20,7 @@ that is checked automatically.
 - Without payment format and currency (simulator shortcuts), validation F1 drops from 0.60 to 0.50.
 - Explanations: the top-3 TreeSHAP reasons match the true scheme's warning-sign family for 55% of caught
   laundering, vs 43% for shuffled schemes (p < 0.001) but 77% for three random features.
-- The Claude drafting step has not been run yet (no API key on the build machine); the template drafter passes
+- The AI drafting step has not been run yet (no API key on the build machine); the template drafter passes
   the format and number checks for all 30 cases.
 
 Logistic regression trains on every laundering row plus 10% of normal rows (saga for L1), because the full
@@ -45,10 +45,23 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && .venv/bin/
 .venv/bin/python scripts/07_build_report.py     # fills the course template -> report/
 ```
 
-`06_draft_reports.py` uses Claude (`claude-opus-5-5`) when `ANTHROPIC_API_KEY` is set, and a
-deterministic template otherwise (`--drafter llm|template` to force one). The request enables
-server-side refusal fallbacks (`fallbacks: "default"`), so a declined request is retried on a
-fallback model.
+`06_draft_reports.py` asks a language model to turn each evidence packet into a draft report:
+
+- **Gemini** (`gemini-3.8-flash`, free tier) when `GEMINI_API_KEY` is set. Get a free key at
+  [Google AI Studio](https://aistudio.google.com/apikey). Free-tier prompts may be used by Google to
+  improve its products; the data here is synthetic. Rate-limit errors are retried with backoff.
+- **Claude** (`claude-opus-5-5`) when `ANTHROPIC_API_KEY` is set, with server-side refusal fallbacks
+  (`fallbacks: "default"`), so a declined request is retried on a fallback model.
+- A deterministic **template** otherwise.
+
+`--drafter gemini|claude|template` forces one and `--model` picks another model id. Every draft,
+whoever wrote it, goes through the same format and number checks. Then rebuild the report with `07`:
+
+```bash
+export GEMINI_API_KEY=...   # your key
+.venv/bin/python scripts/06_draft_reports.py --drafter gemini
+.venv/bin/python scripts/07_build_report.py
+```
 
 The exploration notebook `notebooks/01_eda.ipynb` walks through every chart with the decision it led to.
 
@@ -72,7 +85,7 @@ Tests and type checks:
 | `src/aml/metrics.py` | F1 / PR-AUC / best threshold / daily precision of the top-k |
 | `src/aml/accounts.py` | account-day roll-up of transfer scores |
 | `src/aml/explain.py` | do the top reasons match the true scheme? (permutation and random baselines) |
-| `src/aml/str_agent.py` | evidence-only STR drafting (Claude or template) and the format / number checks |
+| `src/aml/str_agent.py` | evidence-only STR drafting (Gemini, Claude or template) and the format / number checks |
 | `src/aml/eda.py`, `viz.py`, `graph.py` | exploration tables and charts; PageRank |
 | `results/` | small JSON/CSV results the report quotes |
 | `figures/` | every chart |

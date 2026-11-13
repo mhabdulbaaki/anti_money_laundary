@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import json
 import re
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field
 from typing import Any
 
 from .features import MINUTES_CAP
 
 DEFAULT_MODEL = "claude-opus-5-5"
+GEMINI_MODEL = "gemini-3.8-flash"  # free tier on the Gemini API (Google AI Studio), Nov 2026
 TITLE = "# DRAFT Suspicious Transaction Report - for analyst review"
 REQUIRED_SECTIONS = [
     "## 1. Subject",
@@ -220,6 +221,31 @@ def draft_report_template(evidence: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def model_display_name(model_id: str) -> str:
+    """'claude-opus-5-5' -> 'Claude Opus 5.5', 'gemini-3.8-flash' -> 'Gemini 3.8 Flash'."""
+    vendor, *rest = model_id.split("-")
+    words: list[str] = []
+    for part in rest:
+        if part.isdigit() and words and words[-1].replace(".", "").isdigit():
+            words[-1] += f".{part}"  # version written with dashes: 5-5 -> 5.5
+        else:
+            words.append(part if part[0].isdigit() else part.capitalize())
+    return " ".join([vendor.capitalize(), *words])
+
+
+def pick_drafter(env: Mapping[str, str]) -> str:
+    """Which drafter the environment's API keys allow: Gemini first, then Claude, else the template."""
+    if env.get("GEMINI_API_KEY") or env.get("GOOGLE_API_KEY"):
+        return "gemini"
+    if env.get("ANTHROPIC_API_KEY") or env.get("ANTHROPIC_AUTH_TOKEN"):
+        return "claude"
+    return "template"
+
+
+def _user_message(evidence: dict[str, Any]) -> str:
+    return "Evidence for one alert:\n```json\n" + json.dumps(evidence, indent=2) + "\n```\nDraft the report."
+
+
 def draft_report_llm(evidence: dict[str, Any], client: Any = None, model: str = DEFAULT_MODEL) -> tuple[str, dict[str, Any]]:
     """Ask Claude for a draft. Returns (text, metadata). Text is empty if the model declined."""
     import anthropic
@@ -232,14 +258,7 @@ def draft_report_llm(evidence: dict[str, Any], client: Any = None, model: str = 
         fallbacks="default",  # re-run on a fallback model if a safety classifier declines
         output_config={"effort": "medium"},
         system=[{"type": "text", "text": SYSTEM_PROMPT, "cache_control": {"type": "ephemeral"}}],
-        messages=[
-            {
-                "role": "user",
-                "content": "Evidence for one alert:\n```json\n"
-                + json.dumps(evidence, indent=2)
-                + "\n```\nDraft the report.",
-            }
-        ],
+        messages=[{"role": "user", "content": _user_message(evidence)}],
     )
     meta = {
         "model": response.model,
@@ -252,3 +271,28 @@ def draft_report_llm(evidence: dict[str, Any], client: Any = None, model: str = 
         return "", meta
     text = "".join(block.text for block in response.content if block.type == "text")
     return text, meta
+
+
+def draft_report_gemini(evidence: dict[str, Any], client: Any = None, model: str = GEMINI_MODEL) -> tuple[str, dict[str, Any]]:
+    """Ask Gemini (Interactions API, free tier) for a draft, with the same prompt and checks as Claude.
+    Returns (text, metadata). Text is empty unless the interaction completed."""
+    if client is None:
+        from google import genai
+        from google.genai import types
+
+        # The key comes from GEMINI_API_KEY (or GOOGLE_API_KEY). Free-tier rate limits are low,
+        # so rate-limit (429) and server errors are retried with backoff.
+        retry = types.HttpRetryOptions(attempts=6, initial_delay=10.0, max_delay=120.0)
+        client = genai.Client(http_options=types.HttpOptions(retry_options=retry))
+    interaction = client.interactions.create(model=model, system_instruction=SYSTEM_PROMPT, input=_user_message(evidence))
+    usage = interaction.usage
+    meta = {
+        "model": str(interaction.model or model),
+        "stop_reason": str(interaction.status),
+        "input_tokens": int(getattr(usage, "total_input_tokens", None) or 0),
+        "output_tokens": int(getattr(usage, "total_output_tokens", None) or 0),
+        "request_id": interaction.id,
+    }
+    if interaction.status != "completed":
+        return "", meta
+    return interaction.output_text or "", meta

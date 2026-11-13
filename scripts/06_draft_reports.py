@@ -1,7 +1,8 @@
 """Step 6: evidence packets for the top accounts of each test day, AI-drafted STRs, and the checks.
 
-Usage: python scripts/06_draft_reports.py [--drafter auto|llm|template] [--per-day 10]
-  auto (default): use Claude if ANTHROPIC_API_KEY / ANTHROPIC_AUTH_TOKEN is set, else the template.
+Usage: python scripts/06_draft_reports.py [--drafter auto|gemini|claude|template] [--model ID] [--per-day 10]
+  auto (default): Gemini if GEMINI_API_KEY / GOOGLE_API_KEY is set, else Claude if ANTHROPIC_API_KEY /
+  ANTHROPIC_AUTH_TOKEN is set, else the deterministic template.
 Writes results/reports/<drafter>/<case>.md, results/reports/evidence/<case>.json and
 results/reports_summary.json.
 """
@@ -21,7 +22,16 @@ import polars as pl
 from aml import config
 from aml.data import owner_types, read_accounts
 from aml.rules import red_flags
-from aml.str_agent import DEFAULT_MODEL, describe_reason, draft_report_llm, draft_report_template, validate_report
+from aml.str_agent import (
+    DEFAULT_MODEL,
+    GEMINI_MODEL,
+    describe_reason,
+    draft_report_gemini,
+    draft_report_llm,
+    draft_report_template,
+    pick_drafter,
+    validate_report,
+)
 
 REVIEW_LIST_SIZE = 100  # the daily account review list (step 5); we draft for the top of it
 
@@ -115,11 +125,12 @@ def build_cases(per_day: int) -> list[dict[str, Any]]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--drafter", choices=["auto", "llm", "template"], default="auto")
+    ap.add_argument("--drafter", choices=["auto", "gemini", "claude", "template"], default="auto")
+    ap.add_argument("--model", help=f"model id (default: {GEMINI_MODEL} for Gemini, {DEFAULT_MODEL} for Claude)")
     ap.add_argument("--per-day", type=int, default=10)
     args = ap.parse_args()
-    has_creds = bool(os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"))
-    drafter = args.drafter if args.drafter != "auto" else ("llm" if has_creds else "template")
+    drafter = args.drafter if args.drafter != "auto" else pick_drafter(os.environ)
+    model = args.model or {"gemini": GEMINI_MODEL, "claude": DEFAULT_MODEL}.get(drafter)
 
     cases = build_cases(args.per_day)
     out_dir = config.RESULTS / "reports"
@@ -132,12 +143,14 @@ def main() -> None:
         (out_dir / "evidence" / f"{ev['case_id']}.json").write_text(json.dumps(ev, indent=2))
         t = time.time()
         meta: dict[str, Any] = {}
-        if drafter == "llm":
-            text, meta = draft_report_llm(ev)
+        if drafter == "template":
+            text = draft_report_template(ev)
+        else:
+            assert model is not None
+            ask = draft_report_gemini if drafter == "gemini" else draft_report_llm
+            text, meta = ask(ev, model=model)
             usage["input_tokens"] += meta.get("input_tokens", 0)
             usage["output_tokens"] += meta.get("output_tokens", 0)
-        else:
-            text = draft_report_template(ev)
         v = validate_report(text, ev)
         (out_dir / drafter / f"{ev['case_id']}.md").write_text(text)
         rows.append(
@@ -156,7 +169,7 @@ def main() -> None:
     n = len(rows)
     summary = {
         "drafter": drafter,
-        "model": DEFAULT_MODEL if drafter == "llm" else None,
+        "model": model,
         "reports": n,
         "format_ok_rate": float(np.mean([r["format_ok"] for r in rows])),
         "numbers_ok_rate": float(np.mean([r["numbers_ok"] for r in rows])),
