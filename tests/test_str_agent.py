@@ -1,4 +1,13 @@
-from aml.str_agent import REQUIRED_SECTIONS, draft_report_template, validate_report
+from types import SimpleNamespace
+
+from aml.str_agent import (
+    DEFAULT_MODEL,
+    REQUIRED_SECTIONS,
+    SYSTEM_PROMPT,
+    draft_report_llm,
+    draft_report_template,
+    validate_report,
+)
 
 EVIDENCE = {
     "case_id": "CASE-0007",
@@ -92,3 +101,47 @@ def test_small_numbers_cannot_be_justified_by_rounding():
     # The risk score 0.97 must not make a bare "1" look supported.
     text = _report().replace("Analyst to review the account.", "Analyst to review 1 account.")
     assert validate_report(text, EVIDENCE).unsupported_numbers == ["1"]
+
+
+# ---------------------------------------------------------------- Claude call (mocked, no network)
+class _FakeMessages:
+    def __init__(self, response):
+        self.response = response
+        self.kwargs = None
+
+    def create(self, **kwargs):
+        self.kwargs = kwargs
+        return self.response
+
+
+class _FakeClient:
+    def __init__(self, response):
+        self.beta = SimpleNamespace(messages=_FakeMessages(response))
+
+
+def _response(stop_reason="end_turn", text="draft"):
+    return SimpleNamespace(
+        model="claude-opus-5-5",
+        stop_reason=stop_reason,
+        usage=SimpleNamespace(input_tokens=900, output_tokens=300),
+        content=[SimpleNamespace(type="thinking", text="ignored"), SimpleNamespace(type="text", text=text)]
+        if stop_reason != "refusal"
+        else [],
+    )
+
+
+def test_llm_draft_sends_evidence_with_fallbacks_and_returns_text():
+    client = _FakeClient(_response(text=_report()))
+    text, meta = draft_report_llm(EVIDENCE, client=client)
+    sent = client.beta.messages.kwargs
+    assert sent["model"] == DEFAULT_MODEL
+    assert sent["fallbacks"] == "default" and "server-side-fallback-2026-07-01" in sent["betas"]
+    assert sent["system"][0]["text"] == SYSTEM_PROMPT
+    assert "CASE-0007" in sent["messages"][0]["content"]
+    assert text == _report() and validate_report(text, EVIDENCE).ok
+    assert meta["stop_reason"] == "end_turn" and meta["output_tokens"] == 300
+
+
+def test_llm_draft_refusal_returns_empty_text():
+    text, meta = draft_report_llm(EVIDENCE, client=_FakeClient(_response(stop_reason="refusal")))
+    assert text == "" and meta["stop_reason"] == "refusal"

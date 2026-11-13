@@ -12,7 +12,7 @@ import time
 import polars as pl
 
 from aml import config
-from aml.data import attach_typology, index_accounts, parse_patterns, read_accounts, read_transactions
+from aml.data import KEY_COLUMNS, attach_typology, index_accounts, parse_patterns, read_accounts, read_transactions
 from aml.features import build_features
 from aml.fx import add_amount_usd, estimate_usd_rates, max_conversion_error
 from aml.split import chronological_split
@@ -55,7 +55,7 @@ def main() -> None:
     pl.DataFrame({"key": keys}).write_parquet(config.ACCOUNT_KEYS)
 
     accounts = read_accounts(config.ACCOUNTS_CSV)
-    matched = patterns.join(tx.select(patterns.columns[:10]).unique(), on=patterns.columns[:10], how="semi").height
+    matched = patterns.join(tx.select(KEY_COLUMNS).unique(), on=KEY_COLUMNS, how="semi").height
     quality = {
         "rows_raw": n_raw,
         "exact_duplicates_dropped": n_raw - tx.height,

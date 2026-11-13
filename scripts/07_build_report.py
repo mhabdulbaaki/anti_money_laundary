@@ -191,7 +191,7 @@ def content(R: dict[str, Any]) -> dict[str, Any]:
             "so we report both; AI drafts are advisory.",
         ],
         3: [
-            "Each finding drove a decision (EDA notebook). (i) No missing values or non-positive amounts, so no "
+            "Each finding drove a decision (EDA notebook; its label statistics use all 18 days, the models only training labels). (i) No missing values or non-positive amounts, so no "
             f"missingness (MCAR or MAR) to impute; {q['exact_duplicates_dropped']} exact duplicates → dropped. (ii) Exchange rates are "
             f"fixed: both sides of {q['cross_currency_rows']:,} currency-changing transfers agree within {q['max_conversion_error_rel']:.3%} "
             f"→ amounts in US dollars. (iii) Amounts span US$0.0001–{q['amount_usd_max'] / 1e9:.0f} billion → log scale. (iv) Days "
