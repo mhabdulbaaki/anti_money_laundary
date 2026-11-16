@@ -158,10 +158,15 @@ def content(R: dict[str, Any]) -> dict[str, Any]:
     drafts = R["drafts"] or R["drafts_template"]
     per_day = drafts["reports"] // max(len({c["case_id"][4:12] for c in drafts["cases"]}), 1)
     if R["drafts"]:
+        both_ok = drafts["both_ok_rate"]
+        own_numbers = sorted({n for c in drafts["cases"] for n in c["unsupported_numbers"]}, key=float)
         draft_text = (
             f"**AI drafts:** for each test day’s top {per_day} accounts, {model_display_name(drafts['model'])} turned an evidence packet of computed facts "
             f"into a FINTRAC-style draft: {pct(drafts['format_ok_rate'])} were well-formed and {pct(drafts['numbers_ok_rate'])} used only "
-            f"evidence numbers ({drafts['reports']} drafts)."
+            f"evidence numbers ({drafts['reports']} drafts), "
+            + ("meeting" if both_ok >= 0.95 else "just short of")
+            + " the 95% target"
+            + (f"; the misses quote numbers the model worked out itself ({', '.join(own_numbers)})." if own_numbers else ".")
         )
     else:
         draft_text = (

@@ -20,8 +20,9 @@ that is checked automatically.
 - Without payment format and currency (simulator shortcuts), validation F1 drops from 0.60 to 0.50.
 - Explanations: the top-3 TreeSHAP reasons match the true scheme's warning-sign family for 55% of caught
   laundering, vs 43% for shuffled schemes (p < 0.001) but 77% for three random features.
-- The AI drafting step has not been run yet (no API key on the build machine); the template drafter passes
-  the format and number checks for all 30 cases.
+- AI drafts (Gemini 3.8 Flash, top 10 accounts on each of the 3 normal test days): 30 of 30 well-formed and
+  28 of 30 (93%) quote only evidence numbers, just short of the 95% target. The two misses are numbers the
+  model worked out itself (a "46 minutes" gap between transfers, and "0 rules" for an empty rule list).
 
 Logistic regression trains on every laundering row plus 10% of normal rows (saga for L1), because the full
 L1 fit did not finish in an hour; LightGBM uses `min_child_weight=1` to stay stable on 1:1000 data.
