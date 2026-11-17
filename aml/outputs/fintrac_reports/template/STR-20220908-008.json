@@ -1,0 +1,60 @@
+{
+  "case_id": "STR-20220908-008",
+  "review_date": "2022-09-08",
+  "account": {
+    "account_id": "0214615_8075AC7C0",
+    "bank_code": "0214615",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.989,
+    "rank_today": 8,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 8,
+    "transfers_flagged": 3,
+    "sent_count": 6,
+    "sent_total_usd": 85402.11,
+    "received_count": 2,
+    "received_total_usd": 13.49,
+    "distinct_counterparties": 4
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-08 17:55",
+      "direction": "sent",
+      "counterparty": "0136334_80D71C940",
+      "amount_usd": 11314.93,
+      "currency": "Brazil Real",
+      "payment_format": "ACH",
+      "transfer_score": 0.989
+    },
+    {
+      "time": "2022-09-08 16:53",
+      "direction": "sent",
+      "counterparty": "021918_810E74260",
+      "amount_usd": 14039.28,
+      "currency": "Euro",
+      "payment_format": "ACH",
+      "transfer_score": 0.989
+    },
+    {
+      "time": "2022-09-08 18:45",
+      "direction": "sent",
+      "counterparty": "0218502_80705A7B0",
+      "amount_usd": 17346.85,
+      "currency": "Ruble",
+      "payment_format": "ACH",
+      "transfer_score": 0.958
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the sender had never paid this receiver before",
+    "the amount was US$11,314.93"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-08 17:55)",
+  "red_flag_rules": []
+}

@@ -1,0 +1,80 @@
+{
+  "case_id": "STR-20220910-004",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "0015085_81121FAB0",
+    "bank_code": "0015085",
+    "owner_type": "Sole Proprietorship"
+  },
+  "risk": {
+    "score": 0.999,
+    "rank_today": 4,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 7,
+    "transfers_flagged": 6,
+    "sent_count": 1,
+    "sent_total_usd": 12057.82,
+    "received_count": 6,
+    "received_total_usd": 61674.11,
+    "distinct_counterparties": 6
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 09:45",
+      "direction": "received",
+      "counterparty": "003149_80156DE70",
+      "amount_usd": 16530.28,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.999
+    },
+    {
+      "time": "2022-09-10 12:19",
+      "direction": "received",
+      "counterparty": "0147241_812A129E0",
+      "amount_usd": 12843.25,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.998
+    },
+    {
+      "time": "2022-09-10 05:37",
+      "direction": "received",
+      "counterparty": "013327_8021BC810",
+      "amount_usd": 9719.5,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.995
+    },
+    {
+      "time": "2022-09-10 07:57",
+      "direction": "received",
+      "counterparty": "0021615_80B0F1830",
+      "amount_usd": 16280.79,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.992
+    },
+    {
+      "time": "2022-09-10 10:20",
+      "direction": "received",
+      "counterparty": "0228054_80A49BA50",
+      "amount_usd": 5814.03,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.594
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 12 different accounts in the previous 7 days",
+    "the amount was US$16,530.28"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 09:45)",
+  "red_flag_rules": [
+    "structuring (amount just below the US$10,000 reporting limit)"
+  ]
+}

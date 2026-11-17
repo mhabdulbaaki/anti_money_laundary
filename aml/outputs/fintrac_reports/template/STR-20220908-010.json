@@ -1,0 +1,51 @@
+{
+  "case_id": "STR-20220908-010",
+  "review_date": "2022-09-08",
+  "account": {
+    "account_id": "008771_80C6F48A0",
+    "bank_code": "008771",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.986,
+    "rank_today": 10,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 6,
+    "transfers_flagged": 2,
+    "sent_count": 4,
+    "sent_total_usd": 33041.68,
+    "received_count": 2,
+    "received_total_usd": 2268.14,
+    "distinct_counterparties": 3
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-08 17:13",
+      "direction": "sent",
+      "counterparty": "015863_8056D7330",
+      "amount_usd": 10741.55,
+      "currency": "Euro",
+      "payment_format": "ACH",
+      "transfer_score": 0.986
+    },
+    {
+      "time": "2022-09-08 16:25",
+      "direction": "sent",
+      "counterparty": "0212789_804F99E40",
+      "amount_usd": 5779.29,
+      "currency": "Rupee",
+      "payment_format": "ACH",
+      "transfer_score": 0.963
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the sender had never paid this receiver before",
+    "the amount was US$10,741.55"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-08 17:13)",
+  "red_flag_rules": []
+}

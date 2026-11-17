@@ -1,12 +1,21 @@
 # Data is CDLA-Sharing-1.0 and large: never commit it (download from Kaggle instead)
-data/
-artifacts/
+aml/data/raw/*
+!aml/data/raw/README.md
+aml/data/processed/
+
+# The trained model is rebuilt by `make train`
+aml/model/*
+!aml/model/README.md
+
+# API keys
+.env
+
+# Python and tooling
 .venv/
 __pycache__/
 *.pyc
+*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ipynb_checkpoints/
 .DS_Store
-*.egg-info/
-results/llm_reports/raw_*.json

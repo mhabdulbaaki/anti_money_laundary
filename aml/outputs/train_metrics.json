@@ -1,0 +1,91 @@
+{
+  "winner_family": "xgboost",
+  "threshold": 0.2803023159503937,
+  "families": {
+    "xgboost": {
+      "params": {
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "scale_pos_weight": 1
+      },
+      "cv_f1_mean": 0.21355427808687277,
+      "cv_f1_std": 0.15375282085012576,
+      "cv_pr_auc_mean": 0.1711107572025495,
+      "cv_pr_auc_std": 0.17142314477563197,
+      "trees": 194,
+      "val": {
+        "f1": 0.5959885386819485,
+        "precision": 0.7843137254901961,
+        "recall": 0.4805914972273567,
+        "pr_auc": 0.57362878679501,
+        "threshold": 0.2803023159503937,
+        "tp": 520,
+        "fp": 143,
+        "fn": 562,
+        "tn": 1014376
+      },
+      "fit_seconds": 44.144232988357544
+    },
+    "lightgbm": {
+      "params": {
+        "is_unbalance": false,
+        "learning_rate": 0.05,
+        "num_leaves": 127
+      },
+      "cv_f1_mean": 0.20897787999996975,
+      "cv_f1_std": 0.15294134127823727,
+      "cv_pr_auc_mean": 0.15611011036160843,
+      "cv_pr_auc_std": 0.16373685005969346
+    },
+    "logreg": {
+      "params": {
+        "C": 10.0,
+        "penalty": "l2"
+      },
+      "cv_f1_mean": 0.0533824864826124,
+      "cv_f1_std": 0.04187333978034738,
+      "cv_pr_auc_mean": 0.024481197613516702,
+      "cv_pr_auc_std": 0.017851316110874843
+    }
+  },
+  "rules": {
+    "tuned_on_val": {
+      "fan_k": 20,
+      "min_hits": 2,
+      "f1": 0.006708193579300431,
+      "precision": 0.006965174129353234,
+      "recall": 0.006469500924214418,
+      "pr_auc": 0.0012652205099768258,
+      "threshold": 2.0,
+      "tp": 7,
+      "fp": 998,
+      "fn": 1075,
+      "tn": 1013521
+    }
+  },
+  "ablation_no_shortcuts": {
+    "dropped": [
+      "cross_currency",
+      "fmt",
+      "cur_paid",
+      "cur_recv"
+    ],
+    "val": {
+      "f1": 0.5026737967914439,
+      "precision": 0.7038269550748752,
+      "recall": 0.3909426987060998,
+      "pr_auc": 0.48775298684504315,
+      "threshold": 0.2663342356681824,
+      "tp": 423,
+      "fp": 178,
+      "fn": 659,
+      "tn": 1014341
+    }
+  },
+  "published_reference_f1": {
+    "lightgbm_no_graph_features": 0.21,
+    "gfp_lightgbm": 0.6286,
+    "gfp_xgboost": 0.6323
+  },
+  "seconds": 87.8854649066925
+}

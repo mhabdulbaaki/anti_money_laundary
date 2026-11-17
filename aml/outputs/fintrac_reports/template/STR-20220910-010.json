@@ -1,0 +1,44 @@
+{
+  "case_id": "STR-20220910-010",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "0251264_812D1B280",
+    "bank_code": "0251264",
+    "owner_type": "Sole Proprietorship"
+  },
+  "risk": {
+    "score": 0.997,
+    "rank_today": 10,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 1,
+    "transfers_flagged": 1,
+    "sent_count": 1,
+    "sent_total_usd": 13027.77,
+    "received_count": 0,
+    "received_total_usd": 0.0,
+    "distinct_counterparties": 1
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 08:44",
+      "direction": "sent",
+      "counterparty": "0148016_811FCA7B0",
+      "amount_usd": 13027.77,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.997
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 7 different accounts in the previous 7 days",
+    "the amount was US$13,027.77"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 08:44)",
+  "red_flag_rules": [
+    "pass-through (paid on about what it had received in the previous 24 hours)"
+  ]
+}

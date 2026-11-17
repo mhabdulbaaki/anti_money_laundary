@@ -1,0 +1,42 @@
+{
+  "case_id": "STR-20220908-007",
+  "review_date": "2022-09-08",
+  "account": {
+    "account_id": "0136334_80D71C940",
+    "bank_code": "0136334",
+    "owner_type": "Corporation"
+  },
+  "risk": {
+    "score": 0.989,
+    "rank_today": 7,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 1,
+    "transfers_flagged": 1,
+    "sent_count": 0,
+    "sent_total_usd": 0.0,
+    "received_count": 1,
+    "received_total_usd": 11314.93,
+    "distinct_counterparties": 1
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-08 17:55",
+      "direction": "received",
+      "counterparty": "0214615_8075AC7C0",
+      "amount_usd": 11314.93,
+      "currency": "Brazil Real",
+      "payment_format": "ACH",
+      "transfer_score": 0.989
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the sender had never paid this receiver before",
+    "the amount was US$11,314.93"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-08 17:55)",
+  "red_flag_rules": []
+}
