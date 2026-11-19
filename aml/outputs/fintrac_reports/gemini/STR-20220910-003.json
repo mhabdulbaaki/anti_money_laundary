@@ -1,0 +1,51 @@
+{
+  "case_id": "STR-20220910-003",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "0225215_8098DA930",
+    "bank_code": "0225215",
+    "owner_type": "Sole Proprietorship"
+  },
+  "risk": {
+    "score": 0.999,
+    "rank_today": 3,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 3,
+    "transfers_flagged": 2,
+    "sent_count": 3,
+    "sent_total_usd": 34516.36,
+    "received_count": 0,
+    "received_total_usd": 0.0,
+    "distinct_counterparties": 1
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 15:43",
+      "direction": "sent",
+      "counterparty": "0210261_803B8BFC0",
+      "amount_usd": 16906.1,
+      "currency": "Yen",
+      "payment_format": "ACH",
+      "transfer_score": 0.999
+    },
+    {
+      "time": "2022-09-10 15:43",
+      "direction": "sent",
+      "counterparty": "0210261_803B8BFC0",
+      "amount_usd": 352.08,
+      "currency": "Yen",
+      "payment_format": "ACH",
+      "transfer_score": 0.681
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 8 different accounts in the previous 7 days",
+    "the amount was US$16,906.10"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 15:43)",
+  "red_flag_rules": []
+}

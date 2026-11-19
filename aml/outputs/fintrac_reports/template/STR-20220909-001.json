@@ -1,0 +1,62 @@
+{
+  "case_id": "STR-20220909-001",
+  "review_date": "2022-09-09",
+  "account": {
+    "account_id": "0048309_811C599A0",
+    "bank_code": "0048309",
+    "owner_type": "Sole Proprietorship"
+  },
+  "risk": {
+    "score": 1.0,
+    "rank_today": 1,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 6,
+    "transfers_flagged": 3,
+    "sent_count": 1,
+    "sent_total_usd": 12788.29,
+    "received_count": 5,
+    "received_total_usd": 39330.88,
+    "distinct_counterparties": 3
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-09 15:59",
+      "direction": "received",
+      "counterparty": "0150240_812D22980",
+      "amount_usd": 19758.47,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 1.0
+    },
+    {
+      "time": "2022-09-09 04:55",
+      "direction": "received",
+      "counterparty": "0222_811B83280",
+      "amount_usd": 18924.06,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.998
+    },
+    {
+      "time": "2022-09-09 09:08",
+      "direction": "sent",
+      "counterparty": "0048309_811C599A0",
+      "amount_usd": 12788.29,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.566
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had earlier paid the sender (money going back and forth)",
+    "it was paid in Saudi Riyal"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-09 15:59)",
+  "red_flag_rules": [
+    "pass-through (paid on about what it had received in the previous 24 hours)"
+  ]
+}

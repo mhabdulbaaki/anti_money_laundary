@@ -1,0 +1,63 @@
+{
+  "case_id": "STR-20220908-001",
+  "review_date": "2022-09-08",
+  "account": {
+    "account_id": "0150240_812D22980",
+    "bank_code": "0150240",
+    "owner_type": "Corporation"
+  },
+  "risk": {
+    "score": 0.999,
+    "rank_today": 1,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 5,
+    "transfers_flagged": 3,
+    "sent_count": 2,
+    "sent_total_usd": 32766.99,
+    "received_count": 3,
+    "received_total_usd": 15906.62,
+    "distinct_counterparties": 3
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-08 23:38",
+      "direction": "sent",
+      "counterparty": "0222_811B83280",
+      "amount_usd": 14213.33,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.999
+    },
+    {
+      "time": "2022-09-08 17:08",
+      "direction": "sent",
+      "counterparty": "0048309_811C599A0",
+      "amount_usd": 18553.66,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.999
+    },
+    {
+      "time": "2022-09-08 22:52",
+      "direction": "received",
+      "counterparty": "0222_811B83280",
+      "amount_usd": 10067.68,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.998
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had earlier paid the sender (money going back and forth)",
+    "it was paid in Saudi Riyal"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-08 23:38)",
+  "red_flag_rules": [
+    "fan-out (had already paid 20 or more different accounts in the previous 24 hours)",
+    "pass-through (paid on about what it had received in the previous 24 hours)"
+  ]
+}

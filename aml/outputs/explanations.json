@@ -1,0 +1,123 @@
+{
+  "alerts_explained": 983,
+  "true_positives_with_known_scheme": 897,
+  "hit_rate": 0.5529542920847269,
+  "permutation_baseline": 0.4346092530657748,
+  "permutation_p_value": 0.0004997501249375312,
+  "random_reason_baseline": 0.7712617646990082,
+  "per_typology": [
+    {
+      "typology": "FAN-OUT",
+      "n": 111,
+      "hit_rate": 0.3063063063063063,
+      "random_reasons": 0.42138364779874216
+    },
+    {
+      "typology": "FAN-IN",
+      "n": 105,
+      "hit_rate": 0.7428571428571429,
+      "random_reasons": 0.42138364779874216
+    },
+    {
+      "typology": "GATHER-SCATTER",
+      "n": 319,
+      "hit_rate": 0.6802507836990596,
+      "random_reasons": 0.9826567562416619
+    },
+    {
+      "typology": "SCATTER-GATHER",
+      "n": 176,
+      "hit_rate": 0.5056818181818182,
+      "random_reasons": 0.7278444825614636
+    },
+    {
+      "typology": "CYCLE",
+      "n": 57,
+      "hit_rate": 0.5087719298245614,
+      "random_reasons": 0.8286639984753192
+    },
+    {
+      "typology": "RANDOM",
+      "n": 42,
+      "hit_rate": 0.5,
+      "random_reasons": 0.7920335429769392
+    },
+    {
+      "typology": "BIPARTITE",
+      "n": 25,
+      "hit_rate": 0.04,
+      "random_reasons": 0.703830760434534
+    },
+    {
+      "typology": "STACK",
+      "n": 62,
+      "hit_rate": 0.43548387096774194,
+      "random_reasons": 0.9861254049933296
+    }
+  ],
+  "reason_families_in_true_alerts": {
+    "other": 2024,
+    "loop": 64,
+    "pass_through": 239,
+    "fan_in": 256,
+    "fan_out": 110,
+    "parallel_paths": 1
+  },
+  "feature_names": [
+    "log_amount_usd",
+    "hour",
+    "self_transfer",
+    "same_bank",
+    "cross_currency",
+    "just_below_limit",
+    "round_hundred",
+    "src_out_cnt_1h",
+    "src_out_usd_1h",
+    "src_out_uniq_1h",
+    "src_out_cnt_24h",
+    "src_out_usd_24h",
+    "src_out_uniq_24h",
+    "src_out_cnt_7d",
+    "src_out_usd_7d",
+    "src_out_uniq_7d",
+    "src_in_cnt_1h",
+    "src_in_usd_1h",
+    "src_in_uniq_1h",
+    "src_in_cnt_24h",
+    "src_in_usd_24h",
+    "src_in_uniq_24h",
+    "src_in_cnt_7d",
+    "src_in_usd_7d",
+    "src_in_uniq_7d",
+    "dst_out_cnt_1h",
+    "dst_out_usd_1h",
+    "dst_out_uniq_1h",
+    "dst_out_cnt_24h",
+    "dst_out_usd_24h",
+    "dst_out_uniq_24h",
+    "dst_out_cnt_7d",
+    "dst_out_usd_7d",
+    "dst_out_uniq_7d",
+    "dst_in_cnt_1h",
+    "dst_in_usd_1h",
+    "dst_in_uniq_1h",
+    "dst_in_cnt_24h",
+    "dst_in_usd_24h",
+    "dst_in_uniq_24h",
+    "dst_in_cnt_7d",
+    "dst_in_usd_7d",
+    "dst_in_uniq_7d",
+    "src_in_out_ratio_24h",
+    "src_in_out_ratio_7d",
+    "amount_vs_src_in_24h",
+    "amount_vs_src_avg_out_7d",
+    "pair_seen_before",
+    "reciprocal_before",
+    "cycle3_before",
+    "paths2_before",
+    "mins_since_src_in",
+    "fmt",
+    "cur_paid",
+    "cur_recv"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "case_id": "STR-20220910-005",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "003149_80156DE70",
+    "bank_code": "003149",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.999,
+    "rank_today": 5,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 4,
+    "transfers_flagged": 1,
+    "sent_count": 2,
+    "sent_total_usd": 16768.91,
+    "received_count": 2,
+    "received_total_usd": 88.84,
+    "distinct_counterparties": 3
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 09:45",
+      "direction": "sent",
+      "counterparty": "0015085_81121FAB0",
+      "amount_usd": 16530.28,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.999
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 12 different accounts in the previous 7 days",
+    "the amount was US$16,530.28"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 09:45)",
+  "red_flag_rules": []
+}

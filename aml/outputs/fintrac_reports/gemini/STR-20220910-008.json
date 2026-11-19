@@ -1,0 +1,51 @@
+{
+  "case_id": "STR-20220910-008",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "0147241_812A129E0",
+    "bank_code": "0147241",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.998,
+    "rank_today": 8,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 2,
+    "transfers_flagged": 2,
+    "sent_count": 2,
+    "sent_total_usd": 13329.51,
+    "received_count": 0,
+    "received_total_usd": 0.0,
+    "distinct_counterparties": 1
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 12:19",
+      "direction": "sent",
+      "counterparty": "0015085_81121FAB0",
+      "amount_usd": 12843.25,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.998
+    },
+    {
+      "time": "2022-09-10 12:19",
+      "direction": "sent",
+      "counterparty": "0015085_81121FAB0",
+      "amount_usd": 486.26,
+      "currency": "US Dollar",
+      "payment_format": "ACH",
+      "transfer_score": 0.514
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 14 different accounts in the previous 7 days",
+    "the amount was US$12,843.25"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 12:19)",
+  "red_flag_rules": []
+}

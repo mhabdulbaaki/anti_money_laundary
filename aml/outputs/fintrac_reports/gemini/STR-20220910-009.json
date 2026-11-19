@@ -1,0 +1,53 @@
+{
+  "case_id": "STR-20220910-009",
+  "review_date": "2022-09-10",
+  "account": {
+    "account_id": "0148016_811FCA7B0",
+    "bank_code": "0148016",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.997,
+    "rank_today": 9,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 5,
+    "transfers_flagged": 2,
+    "sent_count": 1,
+    "sent_total_usd": 13102.64,
+    "received_count": 4,
+    "received_total_usd": 15873.96,
+    "distinct_counterparties": 4
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-10 08:44",
+      "direction": "received",
+      "counterparty": "0251264_812D1B280",
+      "amount_usd": 13027.77,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.997
+    },
+    {
+      "time": "2022-09-10 14:21",
+      "direction": "sent",
+      "counterparty": "0223_811EDA940",
+      "amount_usd": 13102.64,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.825
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had been paid by 7 different accounts in the previous 7 days",
+    "the amount was US$13,027.77"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-10 08:44)",
+  "red_flag_rules": [
+    "pass-through (paid on about what it had received in the previous 24 hours)"
+  ]
+}

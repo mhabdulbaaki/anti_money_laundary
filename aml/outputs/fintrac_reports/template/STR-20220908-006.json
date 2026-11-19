@@ -1,0 +1,42 @@
+{
+  "case_id": "STR-20220908-006",
+  "review_date": "2022-09-08",
+  "account": {
+    "account_id": "0119_811C597B0",
+    "bank_code": "0119",
+    "owner_type": "Partnership"
+  },
+  "risk": {
+    "score": 0.991,
+    "rank_today": 6,
+    "daily_review_list_size": 100,
+    "alert_threshold": 0.28
+  },
+  "activity_today": {
+    "transfers": 3,
+    "transfers_flagged": 1,
+    "sent_count": 0,
+    "sent_total_usd": 0.0,
+    "received_count": 3,
+    "received_total_usd": 13252.13,
+    "distinct_counterparties": 2
+  },
+  "flagged_transfers": [
+    {
+      "time": "2022-09-08 19:12",
+      "direction": "received",
+      "counterparty": "0048309_811C599A0",
+      "amount_usd": 12865.31,
+      "currency": "Saudi Riyal",
+      "payment_format": "ACH",
+      "transfer_score": 0.991
+    }
+  ],
+  "reasons": [
+    "it was paid by ACH",
+    "the receiver had earlier paid the sender (money going back and forth)",
+    "the amount was US$12,865.31"
+  ],
+  "reasons_refer_to": "the highest-scoring transfer (2022-09-08 19:12)",
+  "red_flag_rules": []
+}

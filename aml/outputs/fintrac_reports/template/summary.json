@@ -1,0 +1,285 @@
+{
+  "drafter": "template",
+  "model": null,
+  "reports": 30,
+  "format_ok_rate": 1.0,
+  "numbers_ok_rate": 1.0,
+  "both_ok_rate": 1.0,
+  "cases_truly_involved": 30,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "cases": [
+    {
+      "case_id": "STR-20220908-001",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-002",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-003",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-004",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-005",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-006",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-007",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-008",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-009",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220908-010",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-001",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-002",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-003",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-004",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-005",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-006",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-007",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-008",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-009",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220909-010",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-001",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-002",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-003",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-004",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-005",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-006",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-007",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-008",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-009",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    },
+    {
+      "case_id": "STR-20220910-010",
+      "format_ok": true,
+      "numbers_ok": true,
+      "missing_sections": [],
+      "unsupported_numbers": [],
+      "truly_involved": 1,
+      "seconds": 0.0
+    }
+  ]
+}

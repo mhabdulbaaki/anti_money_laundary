@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aml"
+version = "0.1.0"
+description = "Explainable money-laundering detection on IBM AMLworld HI-Small (DSCI 6601 course project)"
+requires-python = ">=3.11"
+
+[tool.setuptools]
+packages = ["src", "ai_agent"]  # the pipeline code and the report-drafting assistant
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true

@@ -1,0 +1,26 @@
+[
+  {
+    "fold": 0,
+    "train_rows": 761614,
+    "val_rows": 761325,
+    "val_laundering": 351,
+    "val_start": "2022-09-01 13:28:00",
+    "val_end": "2022-09-02 12:44:00"
+  },
+  {
+    "fold": 1,
+    "train_rows": 1522939,
+    "val_rows": 762047,
+    "val_laundering": 1005,
+    "val_start": "2022-09-02 12:45:00",
+    "val_end": "2022-09-05 00:00:00"
+  },
+  {
+    "fold": 2,
+    "train_rows": 2284986,
+    "val_rows": 761873,
+    "val_laundering": 768,
+    "val_start": "2022-09-05 00:01:00",
+    "val_end": "2022-09-06 13:35:00"
+  }
+]
