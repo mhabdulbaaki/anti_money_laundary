@@ -10,6 +10,8 @@ aml/model/*
 # API keys
 .env
 
+course_report/
+
 # Python and tooling
 .venv/
 __pycache__/
